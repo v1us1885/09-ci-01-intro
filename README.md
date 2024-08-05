@@ -48,3 +48,7 @@
 ![simple](simple.png)
 
 ![bug](bug.png)
+
+https://github.com/v1us1885/09-ci-01-intro/blob/main/Bug%20Workflow.xml
+
+https://github.com/v1us1885/09-ci-01-intro/blob/main/Easy%20Workflow.xml
