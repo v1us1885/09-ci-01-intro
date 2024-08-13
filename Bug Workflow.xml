@@ -1,74 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE workflow PUBLIC "-//OpenSymphony Group//DTD OSWorkflow 2.8//EN" "http://www.opensymphony.com/osworkflow/workflow_2_8.dtd">
+<workflow>
+  <meta name="jira.description"></meta>
+  <meta name="jira.update.author.key">JIRAUSER10000</meta>
+  <meta name="jira.updated.date">1723214562078</meta>
+  <initial-actions>
+    <action id="1" name="Create">
+      <validators>
+        <validator name="" type="class">
+          <arg name="permission">Create Issue</arg>
+          <arg name="class.name">com.atlassian.jira.workflow.validator.PermissionValidator</arg>
+        </validator>
+      </validators>
+      <results>
+        <unconditional-result old-status="null" status="open" step="1">
+          <post-functions>
+            <function type="class">
+              <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueCreateFunction</arg>
+            </function>
+            <function type="class">
+              <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+            </function>
+            <function type="class">
+              <arg name="eventTypeId">1</arg>
+              <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+            </function>
+          </post-functions>
+        </unconditional-result>
+      </results>
+    </action>
+  </initial-actions>
+  <steps>
+    <step id="1" name="Open">
+      <meta name="jira.status.id">1</meta>
+      <actions>
+        <action id="11" name="On reproduce">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="2">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="2" name="On reproduce">
+      <meta name="jira.status.id">10002</meta>
+      <actions>
+        <action id="21" name="Open">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="1">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="31" name="Done reproduce">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="3">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="3" name="Done reproduce">
+      <meta name="jira.status.id">10003</meta>
+      <actions>
+        <action id="41" name="On fix">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="4" name="On fix">
+      <meta name="jira.status.id">10004</meta>
+      <actions>
+        <action id="51" name="On reproduce">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="2">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="61" name="Done fix">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="5">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="5" name="Done fix">
+      <meta name="jira.status.id">10005</meta>
+      <actions>
+        <action id="71" name="On test">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="6">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="6" name="On test">
+      <meta name="jira.status.id">10006</meta>
+      <actions>
+        <action id="81" name="On fix">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="4">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="91" name="Done">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="7">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="7" name="Done">
+      <meta name="jira.status.id">10001</meta>
+      <actions>
+        <action id="101" name="Closed">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="8">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+        <action id="111" name="Open">
+          <meta name="jira.description"></meta>
+          <meta name="jira.fieldscreen.id"></meta>
+          <results>
+            <unconditional-result old-status="null" status="null" step="1">
+              <post-functions>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.UpdateIssueStatusFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.misc.CreateCommentFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.GenerateChangeHistoryFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="class.name">com.atlassian.jira.workflow.function.issue.IssueReindexFunction</arg>
+                </function>
+                <function type="class">
+                  <arg name="eventTypeId">13</arg>
+                  <arg name="class.name">com.atlassian.jira.workflow.function.event.FireIssueEventFunction</arg>
+                </function>
+              </post-functions>
+            </unconditional-result>
+          </results>
+        </action>
+      </actions>
+    </step>
+    <step id="8" name="Closed">
+      <meta name="jira.status.id">6</meta>
+    </step>
+  </steps>
+</workflow>
 
-<!-- 
-RSS generated by JIRA (9.12.12#9120012-sha1:9afad32836b39ea19f5a357a6aae8106be665a8f) at Mon Aug 05 14:45:56 UTC 2024
-
-It is possible to restrict the fields that are returned in this document by specifying the 'field' parameter in your request.
-For example, to request only the issue key and summary append 'field=key&field=summary' to the URL of your request.
--->
-<rss version="0.92" >
-<channel>
-    <title>Jira</title>
-    <link>http://89.169.171.65:8080</link>
-    <description>This file is an XML representation of an issue</description>
-    <language>en-us</language>    <build-info>
-        <version>9.12.12</version>
-        <build-number>9120012</build-number>
-        <build-date>30-07-2024</build-date>
-    </build-info>
-
-
-<item>
-            <title>[HW-1] aa</title>
-                <link>http://89.169.171.65:8080/browse/HW-1</link>
-                <project id="10000" key="HW">hw</project>
-                    <description>&lt;p&gt;aaaa&lt;/p&gt;</description>
-                <environment></environment>
-        <key id="10000">HW-1</key>
-            <summary>aa</summary>
-                <type id="10005" iconUrl="http://89.169.171.65:8080/secure/viewavatar?size=xsmall&amp;avatarId=10300&amp;avatarType=issuetype">Bug Workflow</type>
-                                            <priority id="3" iconUrl="http://89.169.171.65:8080/images/icons/priorities/medium.svg">Medium</priority>
-                        <status id="6" iconUrl="http://89.169.171.65:8080/images/icons/statuses/closed.png" description="The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.">Closed</status>
-                    <statusCategory id="3" key="done" colorName="success"/>
-                                    <resolution id="-1">Unresolved</resolution>
-                                        <assignee username="ariota">Artur F</assignee>
-                                    <reporter username="ariota">Artur F</reporter>
-                        <labels>
-                    </labels>
-                <created>Mon, 5 Aug 2024 16:42:59 +0300</created>
-                <updated>Mon, 5 Aug 2024 16:46:05 +0300</updated>
-                                                                                <due></due>
-                            <votes>0</votes>
-                                    <watches>1</watches>
-                                                                                                                <comments>
-                            <comment id="10008" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:46:05 +0300"  >&lt;p&gt;closed&lt;/p&gt;</comment>
-                            <comment id="10007" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:45:54 +0300"  >&lt;p&gt;done&lt;/p&gt;</comment>
-                            <comment id="10006" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:45:39 +0300"  >&lt;p&gt;on test&lt;/p&gt;</comment>
-                            <comment id="10005" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:45:26 +0300"  >&lt;p&gt;done fix&lt;/p&gt;</comment>
-                            <comment id="10004" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:45:12 +0300"  >&lt;p&gt;on fix&lt;/p&gt;</comment>
-                            <comment id="10003" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:44:57 +0300"  >&lt;p&gt;done reduce&lt;/p&gt;</comment>
-                            <comment id="10002" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:44:39 +0300"  >&lt;p&gt;reduce&lt;/p&gt;</comment>
-                            <comment id="10001" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:43:50 +0300"  >&lt;p&gt;ggg&lt;/p&gt;</comment>
-                            <comment id="10000" author="JIRAUSER10000" created="Mon, 5 Aug 2024 16:43:40 +0300"  >&lt;p&gt;vbn&lt;/p&gt;</comment>
-                    </comments>
-                    <attachments>
-                    </attachments>
-                <subtasks>
-                    </subtasks>
-                <customfields>
-                                                <customfield id="customfield_10000" key="com.atlassian.jira.plugins.jira-development-integration-plugin:devsummary">
-                        <customfieldname>Development</customfieldname>
-                        <customfieldvalues>
-                            
-                        </customfieldvalues>
-                    </customfield>
-                                                                                                                                                                                <customfield id="customfield_10101" key="com.pyxis.greenhopper.jira:gh-lexo-rank">
-                        <customfieldname>&#1056;&#1077;&#1081;&#1090;&#1080;&#1085;&#1075;</customfieldname>
-                        <customfieldvalues>
-                            <customfieldvalue>0|hzzzzz:</customfieldvalue>
-
-                        </customfieldvalues>
-                    </customfield>
-                                                                                                                        </customfields>
-    </item>
-</channel>
-</rss>
